@@ -3,6 +3,7 @@ package com.example.memes_app
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
@@ -28,6 +29,10 @@ class HomeActivity : AppCompatActivity() {
 
         btnNext.setOnClickListener {
             this@HomeActivity.loadMeme()
+        }
+
+        btnShare.setOnClickListener {
+            Toast.makeText(this@HomeActivity, "Share not available yet", Toast.LENGTH_LONG)
         }
         val queue=JsonObjectRequest (Request.Method.GET, url, null, Response.Listener { response ->
             val url=response.getString("url")
