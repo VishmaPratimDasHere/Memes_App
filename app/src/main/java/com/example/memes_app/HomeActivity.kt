@@ -26,19 +26,21 @@ class HomeActivity : AppCompatActivity() {
         val imgMeme=findViewById<ImageView>(R.id.imgMeme)
         val btnNext=findViewById<Button>(R.id.btnNext)
         val btnShare=findViewById<Button>(R.id.btnShare)
+        val queue=Volley.newRequestQueue(this@HomeActivity)
 
         btnNext.setOnClickListener {
             this@HomeActivity.loadMeme()
         }
 
         btnShare.setOnClickListener {
-            Toast.makeText(this@HomeActivity, "Share not available yet", Toast.LENGTH_LONG)
+            Toast.makeText(this@HomeActivity, "Share not available yet", Toast.LENGTH_LONG).show()
         }
-        val queue=JsonObjectRequest (Request.Method.GET, url, null, Response.Listener { response ->
+        val jsonObjectRequest=JsonObjectRequest (Request.Method.GET, url, null, Response.Listener { response ->
             val url=response.getString("url")
             Glide.with(this).load(url).into(imgMeme)
         }, Response.ErrorListener {
-            Toast.makeText(this@HomeActivity, "Something went wrong, please try again.", Toast.LENGTH_LONG)
+            Toast.makeText(this@HomeActivity, "Something went wrong, please try again.", Toast.LENGTH_LONG).show()
         })
+        queue.add(jsonObjectRequest)
     }
 }
